@@ -1,0 +1,110 @@
+SOURCE: https://medlineplus.gov/ency/article/007810.htm
+TEST: hdl
+============================================================
+
+You Are Here:
+Home
+→
+Medical Encyclopedia
+→
+HDL test
+URL of this page: //medlineplus.gov/ency/article/007810.htm
+HDL test
+To use the sharing features on this page, please enable JavaScript.
+The high-density lipoprotein (HDL) test is a blood test to measure the amount of HDL cholesterol in your blood. HDL is a type of fat (lipid) in your blood.
+HDL is called "good" cholesterol because it helps prevent low-density lipoprotein (LDL) "bad" cholesterol and triglycerides from building up in the arteries. HDL picks up LDL in the blood and carries it to the liver. The liver breaks down LDL cholesterol, and it is passed from the body as waste.
+The HDL test is often done as part of a
+lipid profile
+, which measures other fats in your blood:
+Total cholesterol
+LDL cholesterol
+Triglycerides
+Very low-density lipoprotein cholesterol,
+VLDL cholesterol
+(which is usually calculated from the triglyceride level rather than measured directly)
+How the Test is Performed
+A blood sample is needed. Most of the time,
+blood is drawn from a vein
+located on the inside of the elbow or the back of the hand.
+How to Prepare for the Test
+You should not eat for 9 to 12 hours before the test.
+Alcohol and some medicines can interfere with blood test results.
+Make sure your health care provider knows what medicines you take, including over-the-counter medicines and supplements.
+Your provider will tell you if you need to stop taking any medicines before you have this test.
+Do not stop or change your medicines without talking to your provider first.
+How the Test will Feel
+You may feel slight pain or a sting when the needle is inserted. You may also feel some throbbing at the site after the blood is drawn.
+Why the Test is Performed
+HDL cholesterol is usually measured together with other blood fats. Often it is done to help determine your risk of developing heart disease.
+High HDL helps lower your risk for:
+Heart disease
+Heart attack
+Stroke
+Normal Results
+You want your HDL cholesterol to be high (unless it is due to a condition described below). Optimal values are 60 mg/dL or 1.55 millimoles per liter (mmol/L) or above.
+At risk:
+Men - Less than 40 mg/dL (1.04 mmol/L)
+Women - Less than 50 mg/dL (1.29 mmol/L)
+Normal value ranges may vary slightly among different laboratories. Talk to your provider about the meaning of your specific test results.
+What Abnormal Results Mean
+Low HDL cholesterol levels may be due to:
+Eating a diet high in saturated fats or a diet high in carbohydrates and low in fat
+Lack of physical activity
+Being overweight
+or
+having obesity
+Metabolic syndrome
+Diabetes
+A disorder passed down through families in which there are high amounts of cholesterol and triglycerides in the blood (
+familial combined hyperlipidemia
+)
+Side effect of certain medicines
+Overall, the treatment of low HDL focuses on increased exercise and changes in the diet.
+An elevated HDL is anything over 80 mg/dL (2.0 mmol/L). This can be a result of:
+A genetic variation that causes the body to produce too much HDLÂ
+Overactive thyroid (
+hyperthyroidism
+)
+Drinking too much alcohol
+Risks
+There is little risk involved with having your blood taken. Veins and arteries vary in size from one person to another and from one side of the body to the other. Taking blood from some people may be more difficult than from others.
+Other risks associated with having blood drawn are slight, but may include:
+Fainting
+or feeling lightheaded
+Multiple punctures to locate veins
+Hematoma
+(blood buildup under the skin)
+Excessive bleeding
+Infection (a slight risk any time the skin is broken)
+Considerations
+Certain medicines, pregnancy, infection, and some medical conditions can affect test results.
+Alternative Names
+HDL cholesterol; High-density lipoprotein (HDL) cholesterol levels
+Images
+Cholesterol
+Cholesterol producers
+Blood test
+References
+Bredefeld CL, Lau R, Hussain MM. Lipids and dyslipoproteinemia. In: McPherson RA, Pincus MR, eds.
+Henry's Clinical Diagnosis and Management by Laboratory Methods
+. 24th ed. Philadelphia, PA: Elsevier; 2022:chap 18.
+Genest J, Mora S, Libby P. Lipoprotein disorders and cardiovascular disease. In: Libby P, Bonow RO, Mann DL, Tomaselli, GF, Bhatt DL, Solomon SD, eds.
+Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine
+. 12th ed. Philadelphia, PA: Elsevier; 2022:chap 27.
+Grundy SM, Stone NJ, Bailey AL, et al. 2018 AHA/ACC/AACVPR/AAPA/ABC/ACPM/ADA/AGS/APhA/ASPC/NLA/PCNA Guideline on the management of blood cholesterol: executive summary: a report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines.
+Circulation
+. 2019;139(25):e1046-e1081. PMID: 30565953
+pubmed.ncbi.nlm.nih.gov/30565953/
+.
+Mora S, Libby P, Ridker PM. Primary prevention of cardiovascular disease. In: Libby P, Bonow RO, Mann DL, Tomaselli, GF, Bhatt DL, Solomon SD, eds.
+Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine
+. 12th ed. Philadelphia, PA: Elsevier; 2022:chap 25.
+Robinson JG. Disorders of lipid metabolism. In: Goldman L, Cooney KA, eds.
+Goldman-Cecil Medicine
+. 27th ed. Philadelphia, PA: Elsevier; 2024:chap 190.
+Review Date 7/25/2024
+Updated by: Michael A. Chen, MD, PhD, Associate Professor of Medicine, Division of Cardiology, Harborview Medical Center, University of Washington Medical School, Seattle, WA. Also reviewed by David C. Dugdale, MD, Medical Director, Brenda Conaway, Editorial Director, and the A.D.A.M. Editorial team.
+Learn how to cite this page
+Related MedlinePlus Health Topics
+Cholesterol
+HDL: The "Good" Cholesterol

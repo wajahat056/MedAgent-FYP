@@ -1,0 +1,136 @@
+SOURCE: https://medlineplus.gov/ency/article/003644.htm
+TEST: rbc
+============================================================
+
+You Are Here:
+Home
+→
+Medical Encyclopedia
+→
+RBC count
+URL of this page: //medlineplus.gov/ency/article/003644.htm
+RBC count
+To use the sharing features on this page, please enable JavaScript.
+An RBC count is a blood test that measures how many red blood cells (RBCs) you have.
+RBCs contain
+hemoglobin
+, a protein which carries oxygen. How much oxygen your body tissues get depends on how many RBCs you have and how well they work.
+Watch this video about:
+Red blood cell production
+How the Test is Performed
+A
+blood sample
+is needed.
+How to Prepare for the Test
+No special preparation is necessary.
+How the Test will Feel
+When the needle is inserted to draw blood, some people feel moderate pain. Others feel only a prick or stinging. Afterward, there may be some throbbing or a slight bruise. This soon goes away.
+Why the Test is Performed
+The RBC count is almost always part of a
+complete blood count
+(CBC) test.
+The test can help diagnose different kinds of
+anemia
+(low number of RBCs) and other conditions affecting red blood cells.
+Other conditions that may require an RBC count are:
+Bone marrow disorder in which the marrow is replaced by scar tissue (
+myelofibrosis
+)
+Disease that damages kidney blood vessels (
+Alport syndrome
+)
+Disorder in which red blood cells break down earlier than normal (hemolysis or
+paroxysmal nocturnal hemoglobinuria
+)
+White blood cell cancer (
+leukemia
+or
+multiple myeloma
+)
+Diseases like polycythemia vera that can result in elevated red blood cell levels
+Monitoring the effect of certain medicines on red blood cell levels
+Normal Results
+Normal RBC ranges are:
+Male: 4.2 to 5.7 million cells per microliter (cells/mcL)
+Female: 3.8 to 5.1 million cells/mcL
+The ranges above are common measurements for results of these tests. Normal value ranges may vary slightly among different labs. Some labs use different measurements or test different samples. Talk to your health care provider about the meaning of your specific test results.
+What Abnormal Results Mean
+Higher than normal numbers of RBCs may be due to:
+Bone marrow disease that causes abnormal increase in RBCs (
+polycythemia vera
+)
+Cigarette smoking
+Dehydration
+(for example, from severe diarrhea)
+Failure of the right side of the heart (
+cor pulmonale
+)
+Kidney cysts or tumors
+Low blood oxygen level (hypoxia)
+Problem with the heart's structure and function that is present at birth (
+congenital heart disease
+)
+Scarring or thickening of the lungs (
+pulmonary fibrosis
+)
+Your RBC count will increase for several weeks when you are at a higher altitude.
+Medicines that can increase the RBC count include:
+Anabolic steroids
+Erythropoietin
+Gentamicin
+Testosterone
+Lower-than-normal numbers of RBCs may be due to:
+Anemia
+Bleeding
+Bone marrow cancer called multiple myeloma
+Bone marrow failure (for example, from radiation, toxins, or tumor)
+Deficiency of a hormone called erythropoietin (caused by kidney disease)
+Leukemia
+Malnutrition
+Pregnancy
+RBC destruction (
+hemolysis
+) due to transfusion, blood vessel injury, or other cause
+Deficiency of iron,
+copper
+, folic acid,
+vitamin B6
+, or
+vitamin B12
+Too much water in the body (overhydration)
+Medicines that can decrease the RBC count include:
+Chemotherapy medicines
+Chloramphenicol and certain other antibiotics
+Hydantoins
+Methyldopa
+Nonsteroidal anti-inflammatory drugs (NSAIDs)
+Quinidine
+Risks
+There is little risk involved with having your blood taken. Veins and arteries vary in size from one person to another and from one side of the body to the other. Taking blood from some people may be more difficult than from others.
+Other risks associated with having blood drawn are slight, but may include:
+Excessive bleeding
+Fainting or feeling lightheaded
+Multiple punctures to locate veins
+Hematoma (blood buildup under the skin)
+Infection (a slight risk any time the skin is broken)
+Alternative Names
+Erythrocyte count; Red blood cell count; Anemia - RBC count
+Images
+Blood test
+Formed elements of blood
+References
+Lin JC, Benz EJ Jr. Approach to anemia in the adult and child. In: Hoffman R, Benz EJ, Silberstein LE, et al, eds.
+Hematology: Basic Principles and Practice
+. 8th ed. Philadelphia, PA: Elsevier; 2023:chap 35.
+Means RT Jr. Approach to the anemias. In: Goldman L, Cooney KA, eds.
+Goldman-Cecil Medicine
+. 27th ed. Philadelphia, PA: Elsevier; 2024:chap 144.
+Thom CS. Blood disorders. In: Kliegman RM, St. Geme JW, Blum NJ, et al, eds.
+Nelson Textbook of Pediatrics
+. 22nd ed. Philadelphia, PA: Elsevier; 2025:chap 138.
+Review Date 2/27/2026
+Updated by: Jacob Berman, MD, MPH, Associate Professor of Medicine, Division of General Internal Medicine, University of Washington School of Medicine, Seattle, WA. Also reviewed by David C. Dugdale, MD, Medical Director, Brenda Conaway, Editorial Director, and the A.D.A.M. Editorial team.
+Learn how to cite this page
+Related MedlinePlus Health Topics
+Blood Count Tests
+Blood Disorders
