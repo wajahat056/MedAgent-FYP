@@ -1,0 +1,82 @@
+
+============================================================
+MEDAGENT - AI Medical Report Analyser
+============================================================
+Processing: data/sample_reports/sample_cbc.pdf
+
+Step 1: Extracting text from report...
+  Extracted 3292 characters
+
+Step 2: Parsing lab values...
+  Found 8 test results
+
+Step 3: Analysing against reference ranges...
+
+============================================================
+ANALYSIS RESULTS
+============================================================
+
+[!] ABNORMAL VALUES (3):
+    wbc: 9000 10^9/L [HIGH]  (normal: 4000-11000)
+    platelet count: 150000 10^9/L [HIGH]  (normal: 150000-410000)
+    alt: 689578 U/L [HIGH]  (normal: 7-56)
+
+[OK] NORMAL VALUES (5):
+    mcv: 87.75 fL
+    mch: 27.2 pg
+    mchc: 32.8 g/dL
+    hemoglobin: 12.5 g/dL
+    rbc: 5.2 10^12/L
+============================================================
+
+Step 4: Generating plain-English explanation via Claude API...
+  Retrieving medical context from knowledge base...
+  Retrieved context for 3 test(s)
+
+============================================================
+PLAIN-ENGLISH EXPLANATION
+============================================================
+## Understanding Your Blood Test Results
+
+**Overall Summary**
+
+Most of your blood values are looking normal, which is good news. However, there are three values that have come back outside the normal range, and one of them is significantly outside the expected range and will need prompt attention from your doctor. Let's walk through each one in plain language.
+
+---
+
+### 🔴 ALT (Liver Enzyme) — Significantly High
+
+ALT is an enzyme that lives mainly in your liver cells. Think of it like a substance that normally stays *inside* your liver, doing its job quietly. When liver cells get damaged or irritated, they can "leak" this enzyme out into your bloodstream, causing ALT levels in your blood to rise.
+
+The normal range for ALT is between **7 and 56 units per litre**. Your result came back at **689,578 units per litre**. This is an extraordinarily high number — many times above the upper limit of normal — and is the most important result in this report to discuss with your doctor as soon as possible. A result this elevated can be a sign of significant liver injury or disease. According to trusted medical sources, high ALT levels can sometimes appear even before a person *feels* any symptoms, which is why catching it through a blood test is important.
+
+This result alone cannot tell us *why* the liver may be affected — your doctor will very likely want to run further tests to understand what is going on.
+
+---
+
+### 🟡 WBC (White Blood Cell Count) — Mildly High
+
+White blood cells are your body's infection fighters. They patrol your bloodstream and help protect you from bacteria, viruses, and other threats. A WBC test simply counts how many of these cells are circulating in your blood at the time of the test.
+
+The normal range is **4,000 to 11,000 per litre**, and your result was **9,000 per litre**. This is technically flagged as "high," but it is worth noting that your result is still *well within* what many labs consider a normal range — it sits comfortably in the middle-to-upper portion of the normal band. Mildly elevated white blood cell counts can be caused by many everyday things, including stress, smoking, strenuous activity, or a minor infection. It is generally not alarming on its own, but your doctor will consider it alongside your other results.
+
+---
+
+### 🟡 Platelet Count — Borderline
+
+Platelets are tiny particles in your blood that help it clot when you get a cut or injury. A platelet count measures how many of these are present in your blood.
+
+The normal range is **150,000 to 410,000**, and your result was **150,000** — which sits exactly at the very bottom edge of the normal range. While it has been flagged, it is right on the boundary and may not be a concern on its own. Your doctor will decide whether this needs any follow-up.
+
+---
+
+### ✅ Your Normal Values
+
+The good news is that your red blood cell-related results — including your **hemoglobin, RBC count, MCV, MCH, and MCHC** — all fall within normal ranges. These tests look at how well your blood is carrying oxygen around your body, and there are no concerns there.
+
+---
+
+### ⚕️ Important Reminder
+
+This explanation is meant to help you understand your results in everyday language — it is **not medical advice and cannot replace a conversation with your doctor.** Please share these results with your healthcare provider as soon as possible, particularly given the significantly elevated ALT level. Your doctor is the only person who can properly interpret these results in the context of your full health history, symptoms, and any other tests you may need.
+============================================================

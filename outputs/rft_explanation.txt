@@ -1,0 +1,47 @@
+
+============================================================
+MEDAGENT - AI Medical Report Analyser
+============================================================
+Processing: data/sample_reports/sample_rft.pdf
+
+Step 1: Extracting text from report...
+  Extracted 3443 characters
+
+Step 2: Parsing lab values...
+  Found 1 test results
+
+Step 3: Analysing against reference ranges...
+
+============================================================
+ANALYSIS RESULTS
+============================================================
+
+[!] ABNORMAL VALUES (1):
+    alt: 689578 U/L [HIGH]  (normal: 7-56)
+============================================================
+
+Step 4: Generating plain-English explanation via Claude API...
+  Retrieving medical context from knowledge base...
+  Retrieved context for 1 test(s)
+
+============================================================
+PLAIN-ENGLISH EXPLANATION
+============================================================
+## Your Blood Test Results Explained
+
+Overall, your results show one value that is significantly outside the normal range, which your doctor will want to discuss with you promptly. The rest of your tested values came back normal, which is reassuring. However, the abnormal result is quite far from the expected range and deserves careful attention from a medical professional.
+
+---
+
+### ALT (Liver Enzyme) — HIGH
+
+ALT stands for **alanine aminotransferase**, which is an enzyme found mainly in your liver. Think of it as a substance your liver uses to help carry out important chemical reactions. Normally, only very small amounts of ALT show up in your blood. However, when liver cells become damaged or stressed, they release ALT into the bloodstream, causing levels to rise.
+
+The normal range for ALT is **7 to 56 U/L**, and your result came back at **689,578 U/L**. This is an extraordinarily and significantly elevated level — many thousands of times higher than the upper limit of normal. A result this far outside the normal range would generally suggest that something is causing serious stress or injury to the liver, though only a doctor can interpret what this means for your specific situation.
+
+---
+
+### ⚠️ Important Reminder
+
+This explanation is provided for **educational purposes only** and is **not medical advice**. Please share these results with your doctor as soon as possible. Only a qualified healthcare professional can properly interpret your results, take into account your full medical history, and advise you on any next steps.
+============================================================

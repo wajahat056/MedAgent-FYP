@@ -1,0 +1,56 @@
+
+============================================================
+MEDAGENT - AI Medical Report Analyser
+============================================================
+Processing: data/sample_reports/sample_lft.pdf
+
+Step 1: Extracting text from report...
+  Extracted 2260 characters
+
+Step 2: Parsing lab values...
+  Found 2 test results
+
+Step 3: Analysing against reference ranges...
+
+============================================================
+ANALYSIS RESULTS
+============================================================
+
+[!] ABNORMAL VALUES (2):
+    alt: 689578 U/L [HIGH]  (normal: 7-56)
+    ast: 1 U/L [LOW]  (normal: 10-40)
+============================================================
+
+Step 4: Generating plain-English explanation via Claude API...
+  Retrieving medical context from knowledge base...
+  Retrieved context for 2 test(s)
+
+============================================================
+PLAIN-ENGLISH EXPLANATION
+============================================================
+## Your Blood Test Results Explained
+
+**Overall Summary**
+
+Your results show two abnormal values that your doctor will want to look at closely. One result is extremely far above the normal range, which stands out significantly. The other is just slightly below its normal range. It is important to go over these findings with your doctor as soon as possible.
+
+---
+
+**ALT — Extremely High**
+
+ALT (alanine aminotransferase) is a protein found mainly in your liver. Think of it like an alarm signal — when liver cells are healthy, only small amounts of ALT show up in your blood. But when liver cells are damaged or stressed, they release ALT into the bloodstream, causing levels to rise.
+
+Your ALT result is **689,578 U/L**, while the normal range is **7 to 56 U/L**. This is an extraordinarily extreme result — far, far above normal. A result this high would be a serious concern and would strongly prompt a doctor to investigate for significant liver injury or disease. It is worth noting that results this extreme can sometimes be due to a lab or sample error, which your doctor will also want to rule out.
+
+---
+
+**AST — Slightly Low**
+
+AST (aspartate aminotransferase) is another enzyme found in your liver, as well as in your heart and muscles. Your AST result is **1 U/L**, and the normal range is **10 to 40 U/L**. According to medical guidance, low AST levels are generally considered normal and are not usually a cause for concern on their own.
+
+---
+
+**Important Reminder**
+
+Please share these results with your doctor right away, particularly the ALT value. This explanation is meant only to help you understand what these tests measure in general terms — it is **not medical advice and cannot diagnose any condition**. Only your doctor can interpret your results in the context of your full health picture.
+============================================================
