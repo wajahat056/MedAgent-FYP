@@ -1,0 +1,9 @@
+test,total_tested,normal,abnormal,abnormal_percent
+haematocrit,500,286,214,42.8
+haemoglobin,500,196,304,60.8
+mch,500,146,354,70.8
+mchc,500,110,390,78.0
+mcv,500,317,183,36.6
+platelets,500,313,187,37.4
+rbc,500,444,56,11.2
+wbc,500,399,101,20.2
