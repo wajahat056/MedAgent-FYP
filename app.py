@@ -5,9 +5,11 @@
 # terminal-only demo. It lets a user upload a PDF lab report
 # and see the full pipeline output in a clean, visual layout.
 #
-# Includes readability scoring (Flesch-Kincaid) to objectively
-# measure how much simpler the AI explanation is compared to
-# the original report.
+# Includes:
+#   - Three explanation length modes (Quick / Standard / Detailed)
+#     added based on supervisor feedback for progressive disclosure
+#   - Readability scoring (Flesch-Kincaid) to objectively measure
+#     how much simpler the AI explanation is vs. the original
 #
 # Runs with: streamlit run app.py
 # ============================================================
@@ -89,6 +91,33 @@ if uploaded_file is not None:
 
     st.success(f"✅ File uploaded: **{uploaded_file.name}**")
 
+    # -----------------
+    # EXPLANATION MODE SELECTOR
+    # -----------------
+    # New feature added based on supervisor feedback: some users
+    # want just a quick summary of what's abnormal, while others
+    # want a full detailed explanation. Progressive disclosure.
+    # -----------------
+    st.markdown("### 🎯 Choose Explanation Length")
+    st.markdown(
+        "Pick the level of detail that suits you. All modes use the same "
+        "trusted medical sources — they just vary in depth."
+    )
+
+    mode_options = {
+        "⚡ Quick Overview (30 sec)": "quick",
+        "📋 Standard Explanation (2 min)": "standard",
+        "📚 Detailed Explanation (5 min)": "detailed",
+    }
+
+    selected_mode_label = st.radio(
+        "Select explanation depth:",
+        options=list(mode_options.keys()),
+        index=1,  # Default to Standard
+        horizontal=True,
+    )
+    selected_mode = mode_options[selected_mode_label]
+
     # Analyse button
     if st.button("🔍 Analyse Report", type="primary"):
 
@@ -162,16 +191,24 @@ if uploaded_file is not None:
         st.divider()
 
         # -----------------
-        # STEP 3: RAG + Report Writer
+        # STEP 3: RAG + Report Writer (with selected mode)
         # -----------------
+        # Show which mode is being generated so the user knows
+        # exactly what they're getting
+        mode_display = selected_mode_label.split(" (")[0]
+
         with st.spinner(
-            "Step 3: Retrieving trusted medical context and generating "
-            "explanation..."
+            f"Step 3: Retrieving trusted medical context and generating "
+            f"{mode_display.lower()} explanation..."
         ):
-            explanation = generate_plain_english_explanation(abnormal, analysed)
+            explanation = generate_plain_english_explanation(
+                abnormal,
+                analysed,
+                mode=selected_mode
+            )
 
         # Display the AI-generated explanation
-        st.markdown("### 📝 Plain-English Explanation")
+        st.markdown(f"### 📝 Plain-English Explanation — {mode_display}")
         st.markdown(explanation)
 
         st.divider()
