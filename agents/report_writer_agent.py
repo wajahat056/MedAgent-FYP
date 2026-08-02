@@ -10,7 +10,7 @@ load_dotenv()
 LENGTH_MODES = {
     "quick": {
         "label": "Quick Overview (30 seconds)",
-        "max_tokens": 300,
+        "max_tokens": 400,
         "instructions": """Write a VERY BRIEF explanation (60-80 words maximum):
 1. One sentence overall summary (is everything fine or are there concerns?).
 2. List each ABNORMAL value in a single short line: "TestName is HIGH/LOW - what this may mean in one plain-English phrase."
@@ -20,7 +20,7 @@ Be extremely concise. No introductions. No extra paragraphs. Just the essentials
     },
     "standard": {
         "label": "Standard Explanation (2 minutes)",
-        "max_tokens": 700,
+        "max_tokens": 900,
         "instructions": """Write a clear, friendly, plain-English explanation (150-250 words):
 1. Start with a brief 2-3 sentence overall summary.
 2. For each ABNORMAL value: explain simply what the test measures and what a high/low result may generally indicate.
@@ -30,7 +30,7 @@ Use simple everyday language. Do not diagnose. Do not recommend treatments."""
     },
     "detailed": {
         "label": "Detailed Explanation (5 minutes)",
-        "max_tokens": 1500,
+        "max_tokens": 1800,
         "instructions": """Write a thorough, friendly, plain-English explanation (400-600 words):
 1. Start with a 3-4 sentence overall summary of how the results look.
 2. For each ABNORMAL value: explain what the test measures, what a high/low result may generally indicate, whether it appears mildly or significantly out of range, and what factors could contribute (using the TRUSTED MEDICAL CONTEXT above).
@@ -43,15 +43,44 @@ Use simple everyday language throughout. Explain any technical terms. Do not dia
 }
 
 
-def generate_plain_english_explanation(abnormal_results, all_results, mode="standard"):
+LANGUAGES = {
+    "english": {
+        "label": "English",
+        "instruction": "Write your entire response in clear, simple English."
+    },
+    "urdu": {
+        "label": "Urdu",
+        "instruction": (
+            "Write your entire response in clear, simple Urdu "
+            "using the Urdu script (Nastaliq/Arabic script), not Roman Urdu. "
+            "Use everyday conversational Urdu vocabulary that a non-medical "
+            "person would understand - avoid overly formal or literary Urdu. "
+            "Keep medical test names in English where there is no common Urdu "
+            "equivalent (e.g. keep 'ALT', 'Hemoglobin' as is), but explain "
+            "them in Urdu."
+        )
+    }
+}
+
+
+def generate_plain_english_explanation(
+    abnormal_results,
+    all_results,
+    mode="standard",
+    language="english"
+):
     if mode not in LENGTH_MODES:
         mode = "standard"
+    if language not in LANGUAGES:
+        language = "english"
 
     mode_config = LENGTH_MODES[mode]
+    language_config = LANGUAGES[language]
 
     client = anthropic.Anthropic(api_key=os.getenv("ANTHROPIC_API_KEY"))
 
-    print(f"  Retrieving medical context from knowledge base... (mode: {mode})")
+    print(f"  Retrieving medical context from knowledge base... "
+          f"(mode: {mode}, language: {language})")
     context_map = retrieve_context_for_all_abnormals(abnormal_results)
 
     context_text = ""
@@ -86,7 +115,9 @@ Here are their results:
 
 {context_text}
 
-{mode_config["instructions"]}"""
+{mode_config["instructions"]}
+
+IMPORTANT LANGUAGE INSTRUCTION: {language_config["instruction"]}"""
 
     message = client.messages.create(
         model="claude-sonnet-4-6",
