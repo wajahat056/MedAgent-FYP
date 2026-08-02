@@ -1,15 +1,11 @@
 # ============================================================
 # MEDAGENT WEB INTERFACE (STREAMLIT)
 # ============================================================
-# This is a web-based interface for MedAgent, replacing the
-# terminal-only demo. It lets a user upload a PDF lab report
-# and see the full pipeline output in a clean, visual layout.
-#
-# Includes:
-#   - Three explanation length modes (Quick / Standard / Detailed)
-#     added based on supervisor feedback for progressive disclosure
-#   - Readability scoring (Flesch-Kincaid) to objectively measure
-#     how much simpler the AI explanation is vs. the original
+# Web interface for MedAgent with:
+#   - Three explanation length modes (Quick/Standard/Detailed)
+#   - English/Urdu language support
+#   - Flesch-Kincaid readability comparison
+#   - Sample report quick-select for easy demoing
 #
 # Runs with: streamlit run app.py
 # ============================================================
@@ -38,10 +34,13 @@ st.set_page_config(
 # HEADER
 # ------------------------------------------------------------
 st.title("🩺 MedAgent")
-st.markdown("### AI-Powered Plain-English Explanations of Medical Lab Reports")
 st.markdown(
-    "Upload a medical lab report PDF and receive a clear, plain-English "
-    "explanation of the results — grounded in trusted medical sources."
+    "#### AI-Powered Plain-English Explanations of Medical Lab Reports"
+)
+st.markdown(
+    "Upload a medical lab report PDF and receive a clear explanation "
+    "of the results — available in **English or Urdu**, and grounded "
+    "in trusted medical sources."
 )
 
 st.divider()
@@ -58,6 +57,7 @@ with st.sidebar:
         "- 🔬 **Rule-based abnormality detection** (deterministic, safe)\n"
         "- 🧠 **RAG retrieval** (ChromaDB + MedlinePlus)\n"
         "- ✍️ **Plain-English generation** (Claude API)\n"
+        "- 🌐 **Bilingual output** (English / Urdu)\n"
     )
     st.markdown("---")
     st.markdown("**Ethics Protocol:** 2594 ST HSET 2026")
@@ -67,65 +67,110 @@ with st.sidebar:
 
 
 # ------------------------------------------------------------
-# FILE UPLOAD
+# SAMPLE REPORT QUICK-SELECT
 # ------------------------------------------------------------
-st.markdown("### 📤 Upload Your Lab Report")
+st.markdown("### 📤 Choose a Lab Report")
 
-uploaded_file = st.file_uploader(
-    "Choose a PDF file",
-    type=["pdf"],
-    help="Upload a Complete Blood Count (CBC), Liver Function Test (LFT), "
-         "or Renal Function Test (RFT) report.",
-)
+tab1, tab2 = st.tabs(["📁 Upload Your Own", "📋 Try a Sample Report"])
 
+uploaded_file = None
+sample_choice = None
 
-# ------------------------------------------------------------
-# PROCESS THE UPLOADED FILE
-# ------------------------------------------------------------
+with tab1:
+    uploaded_file = st.file_uploader(
+        "Choose a PDF file",
+        type=["pdf"],
+        help="Upload a Complete Blood Count (CBC), Liver Function Test (LFT), "
+             "or Renal Function Test (RFT) report.",
+    )
+
+with tab2:
+    st.markdown("No PDF handy? Try one of these sample reports:")
+    sample_options = {
+        "🩸 Sample CBC (Blood Count)": "data/sample_reports/sample_cbc.pdf",
+        "🧪 Sample LFT (Liver Function)": "data/sample_reports/sample_lft.pdf",
+        "🫘 Sample RFT (Kidney Function)": "data/sample_reports/sample_rft.pdf",
+    }
+    sample_choice = st.radio(
+        "Select a sample:",
+        options=["None"] + list(sample_options.keys()),
+        index=0,
+    )
+
+# Determine which file path to actually use
+active_pdf_path = None
+active_filename = None
+
 if uploaded_file is not None:
-
-    # Save the uploaded file to a temporary location so agents can read it
     with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
         tmp_file.write(uploaded_file.getvalue())
-        tmp_pdf_path = tmp_file.name
+        active_pdf_path = tmp_file.name
+        active_filename = uploaded_file.name
 
-    st.success(f"✅ File uploaded: **{uploaded_file.name}**")
+elif sample_choice and sample_choice != "None":
+    sample_path = sample_options[sample_choice]
+    if os.path.exists(sample_path):
+        active_pdf_path = sample_path
+        active_filename = sample_choice
+    else:
+        st.error(f"⚠️ Sample file not found at {sample_path}")
+
+
+# ------------------------------------------------------------
+# PROCESS THE SELECTED FILE
+# ------------------------------------------------------------
+if active_pdf_path is not None:
+
+    st.success(f"✅ Ready to analyse: **{active_filename}**")
+
+    st.divider()
 
     # -----------------
-    # EXPLANATION MODE SELECTOR
+    # SETTINGS ROW: Mode + Language side by side
     # -----------------
-    # New feature added based on supervisor feedback: some users
-    # want just a quick summary of what's abnormal, while others
-    # want a full detailed explanation. Progressive disclosure.
-    # -----------------
-    st.markdown("### 🎯 Choose Explanation Length")
-    st.markdown(
-        "Pick the level of detail that suits you. All modes use the same "
-        "trusted medical sources — they just vary in depth."
-    )
+    st.markdown("### ⚙️ Explanation Settings")
 
-    mode_options = {
-        "⚡ Quick Overview (30 sec)": "quick",
-        "📋 Standard Explanation (2 min)": "standard",
-        "📚 Detailed Explanation (5 min)": "detailed",
-    }
+    settings_col1, settings_col2 = st.columns(2)
 
-    selected_mode_label = st.radio(
-        "Select explanation depth:",
-        options=list(mode_options.keys()),
-        index=1,  # Default to Standard
-        horizontal=True,
-    )
-    selected_mode = mode_options[selected_mode_label]
+    with settings_col1:
+        st.markdown("**🎯 Explanation Length**")
+        mode_options = {
+            "⚡ Quick (30 sec)": "quick",
+            "📋 Standard (2 min)": "standard",
+            "📚 Detailed (5 min)": "detailed",
+        }
+        selected_mode_label = st.radio(
+            "Length:",
+            options=list(mode_options.keys()),
+            index=1,
+            label_visibility="collapsed",
+        )
+        selected_mode = mode_options[selected_mode_label]
+
+    with settings_col2:
+        st.markdown("**🌐 Language**")
+        language_options = {
+            "🇬🇧 English": "english",
+            "🇵🇰 اردو (Urdu)": "urdu",
+        }
+        selected_language_label = st.radio(
+            "Language:",
+            options=list(language_options.keys()),
+            index=0,
+            label_visibility="collapsed",
+        )
+        selected_language = language_options[selected_language_label]
+
+    st.divider()
 
     # Analyse button
-    if st.button("🔍 Analyse Report", type="primary"):
+    if st.button("🔍 Analyse Report", type="primary", use_container_width=True):
 
         # -----------------
         # STEP 1: Extraction
         # -----------------
-        with st.spinner("Step 1: Extracting text from PDF..."):
-            text = extract_text_from_pdf(tmp_pdf_path)
+        with st.spinner("Step 1/3 — Extracting text from PDF..."):
+            text = extract_text_from_pdf(active_pdf_path)
             lab_values = parse_lab_values(text)
 
         if not lab_values:
@@ -142,17 +187,13 @@ if uploaded_file is not None:
         # -----------------
         # STEP 2: Analysis
         # -----------------
-        with st.spinner(
-            "Step 2: Analysing values against clinical reference ranges..."
-        ):
+        with st.spinner("Step 2/3 — Analysing against clinical reference ranges..."):
             analysed = analyse_results(lab_values)
 
-        # Split by status for a cleaner display
         abnormal = [r for r in analysed if r["status"] in ("HIGH", "LOW")]
         normal = [r for r in analysed if r["status"] == "NORMAL"]
         unknown = [r for r in analysed if r["status"] == "UNKNOWN"]
 
-        # Show results in two side-by-side columns
         col1, col2 = st.columns(2)
 
         with col1:
@@ -180,7 +221,6 @@ if uploaded_file is not None:
             else:
                 st.info("No values within the normal range.")
 
-        # Show unknowns collapsed (only useful for debugging)
         if unknown:
             with st.expander(
                 "❓ Unrecognised tests (not in reference database)"
@@ -191,110 +231,123 @@ if uploaded_file is not None:
         st.divider()
 
         # -----------------
-        # STEP 3: RAG + Report Writer (with selected mode)
+        # STEP 3: RAG + Report Writer
         # -----------------
-        # Show which mode is being generated so the user knows
-        # exactly what they're getting
         mode_display = selected_mode_label.split(" (")[0]
+        lang_display = selected_language_label
 
         with st.spinner(
-            f"Step 3: Retrieving trusted medical context and generating "
-            f"{mode_display.lower()} explanation..."
+            f"Step 3/3 — Generating {mode_display.lower()} explanation "
+            f"in {lang_display}..."
         ):
             explanation = generate_plain_english_explanation(
                 abnormal,
                 analysed,
-                mode=selected_mode
+                mode=selected_mode,
+                language=selected_language,
             )
 
-        # Display the AI-generated explanation
-        st.markdown(f"### 📝 Plain-English Explanation — {mode_display}")
-        st.markdown(explanation)
+        st.markdown(
+            f"### 📝 Explanation — {mode_display} · {lang_display}"
+        )
+
+        # Right-align text box for Urdu (RTL script)
+        if selected_language == "urdu":
+            st.markdown(
+                f'<div dir="rtl" style="text-align: right; '
+                f'font-size: 1.05rem; line-height: 2;">{explanation}</div>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(explanation)
 
         st.divider()
 
         # -----------------
         # STEP 4: READABILITY COMPARISON
         # -----------------
-        # This section objectively measures how much simpler the AI's
-        # explanation is compared to the original report, using standard
-        # readability metrics (Flesch-Kincaid and Flesch Reading Ease).
+        # Note: readability metrics (Flesch-Kincaid) are English-only
+        # measures, so we only show this for English output.
         # -----------------
-        st.markdown("### 📊 Readability Comparison")
-        st.markdown(
-            "**Objective measurement** of how much simpler the AI explanation "
-            "is compared to the original report, using standard academic "
-            "readability metrics."
-        )
-
-        # Calculate readability scores for both texts
-        original_grade = textstat.flesch_kincaid_grade(text)
-        explanation_grade = textstat.flesch_kincaid_grade(explanation)
-
-        original_ease = textstat.flesch_reading_ease(text)
-        explanation_ease = textstat.flesch_reading_ease(explanation)
-
-        # Show side-by-side comparison in three columns
-        col_a, col_b, col_c = st.columns(3)
-
-        with col_a:
-            st.metric(
-                label="📄 Original Report",
-                value=f"Grade {original_grade:.1f}",
-                help="Flesch-Kincaid Grade Level — the US school grade "
-                     "needed to understand this text."
+        if selected_language == "english":
+            st.markdown("### 📊 Readability Comparison")
+            st.markdown(
+                "**Objective measurement** of how much simpler the AI "
+                "explanation is compared to the original report."
             )
-            st.caption(f"Reading Ease: {original_ease:.1f}/100")
 
-        with col_b:
-            st.metric(
-                label="✨ AI Explanation",
-                value=f"Grade {explanation_grade:.1f}",
-                delta=f"{explanation_grade - original_grade:.1f} grades",
-                delta_color="inverse",
-                help="Negative delta = the AI explanation is EASIER to read."
+            original_grade = textstat.flesch_kincaid_grade(text)
+            explanation_grade = textstat.flesch_kincaid_grade(explanation)
+            original_ease = textstat.flesch_reading_ease(text)
+            explanation_ease = textstat.flesch_reading_ease(explanation)
+
+            col_a, col_b, col_c = st.columns(3)
+
+            with col_a:
+                st.metric(
+                    label="📄 Original Report",
+                    value=f"Grade {original_grade:.1f}",
+                    help="Flesch-Kincaid Grade Level."
+                )
+                st.caption(f"Reading Ease: {original_ease:.1f}/100")
+
+            with col_b:
+                st.metric(
+                    label="✨ AI Explanation",
+                    value=f"Grade {explanation_grade:.1f}",
+                    delta=f"{explanation_grade - original_grade:.1f} grades",
+                    delta_color="inverse",
+                )
+                st.caption(f"Reading Ease: {explanation_ease:.1f}/100")
+
+            with col_c:
+                improvement = original_grade - explanation_grade
+                if improvement > 0:
+                    st.success(
+                        f"**{improvement:.1f} grade levels easier**"
+                    )
+                elif improvement < 0:
+                    st.warning(
+                        f"{abs(improvement):.1f} grades harder"
+                    )
+                else:
+                    st.info("Similar difficulty")
+
+            st.caption(
+                "📚 Flesch-Kincaid measures reading difficulty. "
+                "Lower grade = easier to read."
             )
-            st.caption(f"Reading Ease: {explanation_ease:.1f}/100")
-
-        with col_c:
-            improvement = original_grade - explanation_grade
-            if improvement > 0:
-                st.success(
-                    f"**{improvement:.1f} grade levels easier**\n\n"
-                    f"The AI explanation is measurably simpler to read."
-                )
-            elif improvement < 0:
-                st.warning(
-                    f"AI explanation is {abs(improvement):.1f} grades harder. "
-                    f"Consider revising the prompt."
-                )
-            else:
-                st.info("Similar reading difficulty.")
-
-        st.caption(
-            "📚 **Flesch-Kincaid Grade Level** is a standard readability "
-            "metric used in academic and educational research. Lower = easier "
-            "to read. Grade 7-8 = general public; Grade 12+ = college level. "
-            "**Flesch Reading Ease** ranges 0-100; higher = easier."
-        )
+        else:
+            st.info(
+                "📊 Readability metrics (Flesch-Kincaid) are calibrated "
+                "for English text only and are not shown for Urdu output."
+            )
 
         st.divider()
 
         # -----------------
         # DISCLAIMER
         # -----------------
-        st.warning(
-            "⚠️ **Important:** This explanation is for educational purposes "
-            "only and is **not medical advice**. Please discuss all lab "
-            "results with a qualified healthcare professional."
-        )
+        if selected_language == "urdu":
+            st.warning(
+                "⚠️ **اہم نوٹ:** یہ وضاحت صرف تعلیمی مقاصد کے لیے ہے اور "
+                "طبی مشورہ نہیں ہے۔ براہ کرم اپنے تمام لیب رزلٹس کسی "
+                "مستند ڈاکٹر سے ضرور شیئر کریں۔"
+            )
+        else:
+            st.warning(
+                "⚠️ **Important:** This explanation is for educational "
+                "purposes only and is **not medical advice**. Please "
+                "discuss all lab results with a qualified healthcare "
+                "professional."
+            )
 
-    # Clean up the temp file
-    os.unlink(tmp_pdf_path)
+    # Clean up temp file if it was an upload
+    if uploaded_file is not None and os.path.exists(active_pdf_path):
+        os.unlink(active_pdf_path)
 
 else:
-    # Placeholder shown before file upload
     st.info(
-        "👆 Upload a PDF lab report above to see the analysis. "
-        "The system supports CBC, LFT, and RFT reports."
+        "👆 Upload a PDF lab report, or try a sample report above, "
+        "to see the analysis."
     )
